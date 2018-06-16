@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ArticleController
+
+class ArticleController extends AbstractController
 {
   /**
    * @Route("/")
@@ -18,7 +20,15 @@ return new Response('OMG MY FIRST PAGE');  }
  * @Route("/news/{slug}")
  */
 public function show($slug){
-return new Response (sprintf(
-  'asteroids :%s', $slug));
+$comments = [
+  "hehehehehe commentaire", "blaaaaa", "hello"
+];
+
+
+
+return $this->render('article/show.article.twig', [
+  'title' => \ucwords(str_replace('-', ' ', $slug)),
+  'comments'=> $comments,
+  ]);
 }
 }
